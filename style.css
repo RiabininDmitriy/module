@@ -1,0 +1,15 @@
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	padding: 40px 100px;
+	/* border: 1px solid black; */
+}
+
+.error {
+	color: #b80a0a;
+}
+
+* {
+	padding: 5px;
+	margin: 5px;
+}

@@ -1,4 +1,11 @@
 window.onload = function () {
+    const checkoutBtn = document.getElementById("checkoutBtn")
+    const radioBtn = document.getElementsByName("typeOfPickUp")
+    const pickUpBtn = document.getElementById("pickUpBtn")
+    const cardBtn = document.getElementById("cardBtn")
+    const pickUp = document.getElementById("pickUp")
+    const payment = document.getElementById("payment")
+
     const sendApi = (url, method, body) => {
         return fetch(url, {
             method: method,
@@ -18,6 +25,7 @@ window.onload = function () {
             if (elementInput[1].length === 0) {
                 let label = document.createElement("label")
                 label.innerText = `${elementInput[0]} input is empty`
+                label.className = "error"
                 document.body.appendChild(label)
                 isValid = false
             }
@@ -45,10 +53,21 @@ window.onload = function () {
         const countrySelect = document.getElementById("country")
         motherData(countries, countrySelect)
     }
+
     getCountry()
 
+    const getYears = async () => {
+        const years = await sendApi("http://localhost:3000/Years", 'GET')
+        const yearsSelect = document.getElementById("eDataY")
+        motherData(years, yearsSelect)
+    }
 
-    const checkoutBtn = document.getElementById("checkoutBtn")
+    const getMonth = async () => {
+        const month = await sendApi("http://localhost:3000/month", 'GET')
+        const monthSelect = document.getElementById("eDataM")
+        motherData(month, monthSelect)
+    }
+
     checkoutBtn.onclick = (event) => {
         let inputs = document.getElementById("users")
         const result = motherFunc(inputs)
@@ -59,59 +78,49 @@ window.onload = function () {
                 'POST',
                 JSON.stringify(result.inputObj)
             )
+            pickUp.hidden = false
+            console.log(pickUp)
         }
         event.preventDefault()
     }
 
-    const radioBtn = document.getElementsByName("typeOfPickUp")
     radioBtn.forEach(typeOfPickUp => {
         typeOfPickUp.onclick = (event) => {
             let delivery = document.getElementById("delivery")
             if (event.target.id === "someone") {
-                delivery.style.display = "block"
+                delivery.style.display = "flex"
+                payment.hidden = true
             } else {
                 delivery.style.display = "none"
+                getYears()
+                getMonth()
+                payment.hidden = false
             }
         }
     })
 
-
-
-    const pickUpBtn = document.getElementById("pickUpBtn")
     pickUpBtn.onclick = (event) => {
         let inputs = document.getElementById("delivery")
         const result = motherFunc(inputs)
-        this.order = { ...this.order, ...result.inputObj }
+        if (result.isValid) {
+            this.order = { ...this.order, ...result.inputObj }
+            getYears()
+            getMonth()
+            payment.hidden = false
+
+        }
         console.log(this.order)
         event.preventDefault()
     }
-
-
-    const getYears = async () => {
-        const years = await sendApi("http://localhost:3000/Years", 'GET')
-        const yearsSelect = document.getElementById("eDataY")
-        motherData(years, yearsSelect)
-    }
-    getYears()
-
-    const getMonth = async () => {
-        const month = await sendApi("http://localhost:3000/month", 'GET')
-        const monthSelect = document.getElementById("eDataM")
-        motherData(month, monthSelect)
-    }
-    getMonth()
-
 
     const CreateOrder = async () => {
         const order = await sendApi("http://localhost:3000/Orders", 'POST',
             JSON.stringify(this.order)
         )
-        localStorage.setItem("order",order.id)
-        window.location = 'index2.html' 
+        localStorage.setItem("order", order.id)
+        window.location = 'index2.html'
     }
 
-
-    const cardBtn = document.getElementById("cardBtn")
     cardBtn.onclick = (event) => {
         let inputs = document.getElementById("card")
         const resultCardBtn = motherFunc(inputs)

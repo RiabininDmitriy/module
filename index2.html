@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
+    <script src="script2.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <script>
-        const index2 = localStorage.getItem("order")
-        alert(`Ваш заказ № ${index2}`)
-        </script>
+    <article>
+        <input type="submit" value="Получить информацию о заказе" id="orderInfoBtn">
+        <input type="submit" value="Продолжить покупки" id="buyContinue">
+    </article>
+    <section id="orderInfo" class="flex-container"></section>
 </body>
 
 </html>

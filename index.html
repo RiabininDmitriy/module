@@ -5,44 +5,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New</title>
+    <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body>
+
+<body class="flex-container">
     <section>
-        <form id="users" >
-           <label for="">country</label> 
-           <select class="text"  name="country" id="country" type="text"></select>
-           <label for="">First name</label>
-            <input class="text"  name="firstName" id="firstName" type="text">
-           <label for="">Last Name</label> 
-           <input class="text"  name="lastName" id="lastName" type="text">
-           <label for="">phone</label> 
-           <input class="text"  name="phone" id="phone" type="number">
-            <input type="submit"  id="checkoutBtn" >
+        <form id="users" class="flex-container">
+            <select class="text" name="country" id="country" type="text"></select>
+            <input class="text" placeholder="First Name" name="firstName" id="firstName" type="text">
+            <input class="text" placeholder="Last Name" name="lastName" id="lastName" type="text">
+            <input class="text" placeholder="Phone" name="phone" id="phone" type="number">
+            <input type="submit" id="checkoutBtn" value="Save and Continue">
         </form>
     </section>
-    <section style="padding: 100px;">
-        <input type="radio" name="typeOfPickUp" value="pick up" id="own"> 
-        <label for="own"> I will pick it up </label>
-        <input type="radio" name="typeOfPickUp" value="someone" id="someone">
-        <label for="someone"> Someone else will pick it up </label>        
-    <form action="" id="delivery" style="display:none">
-        <input type="text" name="AgentfirstName" placeholder="AgentFirstName" >
-        <input type="text" name="AgentLAstName" placeholder="AgentLAstName">
-        <input type="number" name="Agentphone" placeholder="AgentPhone" >
-        <input type="email" name="AgentEmail" placeholder="AgentEmail" >
-        <input type="submit"  id="pickUpBtn" >
-    </form>   
+    <section hidden id="pickUp">
+        <div style=" display: block; margin: 0 auto; width: 400px;">
+            <input type="radio" name="typeOfPickUp" value="pick up" id="own">
+            <label for="own"> I will pick it up </label>
+            <input type="radio" name="typeOfPickUp" value="someone" id="someone">
+            <label for="someone"> Someone else will pick it up </label>
+        </div>
+        <form action="" id="delivery" class="flex-container" style="display:none">
+            <input type="text" name="agentFirstName" placeholder="Agent First Name">
+            <input type="text" name="agentLastName" placeholder="Agent Last Name">
+            <input type="number" name="agentPhone" placeholder="Agent Phone">
+            <input type="email" name="agentEmail" placeholder="Agent Email">
+            <input type="submit" id="pickUpBtn" value="Save and Continue">
+        </form>
     </section>
-<section>
-    <form id="card">
-        <input type="number" placeholder="Credit Card Number" name="ccn"  id="ccn" >
-        <input type="number" placeholder="Security Code" name="sCode" id="sCode">
-        <select name="eDataM" id="eDataM"></select>
-        <select name="eDataY" id="eDataY"></select>
-        <input type="submit" id="cardBtn" value="Save and Continue">
-    </form>
-</section>
+    <section hidden id="payment">
+        <form id="card" class="flex-container">
+            <input type="number" placeholder="Credit Card Number" name="ccn" id="ccn">
+            <input type="number" placeholder="Security Code" name="sCode" id="sCode">
+            <select name="eDataM" id="eDataM"></select>
+            <select name="eDataY" id="eDataY"></select>
+            <input type="submit" id="cardBtn" value="Save and Continue">
+        </form>
+    </section>
 </body>
 
 </html>
